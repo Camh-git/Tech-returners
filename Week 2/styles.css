@@ -4,29 +4,35 @@ html {
   max-width: 100vw;
   overflow-x: hidden;
 }
+h1,
+h2 {
+  margin-top: 7.5vh;
+}
 a:link,
 a:visited {
   text-decoration: none;
   color: black;
 }
-#navbar {
-}
+
 ul,
 li {
   list-style-type: none;
   display: inline-block;
   word-spacing: 1vw;
 }
-
-header,
-nav {
+#banner {
+  display: flex;
+  justify-content: space-around;
   background-color: #99c5ed;
-  margin-top: 0px;
-  width: 100vw;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
-img {
-  max-width: 50vw;
-  max-height: 25vh;
+img,
+video {
+  height: 25vh;
 }
 form {
   background-color: #99c5ed;
@@ -34,4 +40,15 @@ form {
   width: 33vw;
   border-radius: 5%;
   margin-left: 32vw;
+}
+
+input,
+button {
+  border: none;
+  padding: 0.5vw 1.5vh;
+  text-align: center;
+  display: inline-block;
+  font-size: 12px;
+  margin-top: 0.5vh;
+  max-width: 20vw;
 }
