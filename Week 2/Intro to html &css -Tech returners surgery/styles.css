@@ -34,14 +34,33 @@ img,
 video {
   height: 25vh;
 }
+/*A propper version of this would have an @media rule to make them sequential on phone screens */
+section:nth-child(4),
+section:nth-child(5) {
+  float: left;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 form {
   background-color: #99c5ed;
   padding: 1vw;
-  width: 33vw;
+  max-width: 500px;
   border-radius: 5%;
-  margin-left: 32vw;
+  margin: auto;
+  margin-bottom: 10vh;
 }
-
+form div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  float: left;
+  width: 50%;
+}
+form input[type="submit"] {
+  width: 60%;
+}
 input,
 button {
   border: none;
