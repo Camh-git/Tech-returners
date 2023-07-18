@@ -1,0 +1,17 @@
+{
+	"name": "modern_js",
+	"version": "1.0.0",
+	"description": "In session refactoring exercise",
+	"scripts": {
+		"test": "jest"
+	},
+	"author": "Tech Returners",
+	"license": "MIT",
+	"homepage": "https://github.com/techreturners/lm-lab-modern-js",
+	"devDependencies": {
+		"@babel/core": "^7.20.2",
+		"@babel/preset-env": "^7.20.2",
+		"babel-jest": "^29.3.1",
+		"jest": "^29.6.1"
+	}
+}
