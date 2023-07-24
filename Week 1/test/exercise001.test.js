@@ -152,3 +152,10 @@ describe("simpleFizzBuzz", () => {
     expect(simpleFizzBuzz(15)).toBe("fizzbuzz");
   });
 });
+describe("finds the highest value", () => {
+  test("returns 10 from this array", () => {
+    expect(defineMax([1, 2])).toBe("The highest number is: 2");
+    expect(defineMax([9, 8, 7, 6, 5])).toBe("The highest number is: 9");
+    expect(defineMax([1, 5, 4, 3])).toBe("The highest number is: 5");
+  });
+});
