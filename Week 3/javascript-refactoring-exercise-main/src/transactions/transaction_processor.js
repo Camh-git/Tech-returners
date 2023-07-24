@@ -25,7 +25,6 @@ function sortByAmountThenName(txCount) {
       -(itemOne < itemTwo)
     );
   });
-
   let sortedResults = {};
   sortedKeys.forEach((key) => {
     sortedResults[key] = txCount[key];
@@ -36,6 +35,24 @@ function sortByAmountThenName(txCount) {
 
 function validateTransactions(transactions) {
   return transactions !== undefined;
+}
+
+function singleFunctionTest(transactions) {
+  //this was an attempt to cut down to 1 function and avoid swapping between arrays and objects
+  if (!validateTransactions(transactions)) {
+    throw new Error("Undefined collection of transactions");
+  }
+  //Count the items into an array
+  let items = [[], []];
+  transactions.forEach((entry) => {
+    items[0].includes(entry)
+      ? (items[1][items[0].indexOf(entry)] += 1)
+      : (items[0].push(entry), items[1].push(1));
+  });
+
+  //sort the array
+
+  return items;
 }
 
 module.exports = processTransactions;
@@ -54,5 +71,6 @@ module.exports = processTransactions;
 
   Validate transactions was collapsed down to simply return wether or not it's paramater is strictly not undefined 
     (I definitely didn't use === the first time, leading to only undefined transactions passing validation)
+    would replace it with a simple if statement in processTransactions, but having a seperate method could allow for aditional checks
   
 */
