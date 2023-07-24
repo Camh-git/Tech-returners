@@ -106,3 +106,6 @@ export function simpleFizzBuzz(n) {
     return n;
   }
 }
+export function defineMax(array) {
+  return "The highest number is: " + array.sort()[array.length - 1];
+}
