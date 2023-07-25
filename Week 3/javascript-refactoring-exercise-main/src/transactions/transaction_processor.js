@@ -37,8 +37,8 @@ function validateTransactions(transactions) {
   return transactions !== undefined;
 }
 
-function singleFunctionTest(transactions) {
-  //this was an attempt to cut down to 1 function and avoid swapping between arrays and objects
+function processTransactionsAsArray(transactions) {
+  //this was an attempt to cut down to 1 function and avoid swapping between arrays and objects by using arrays the whole way
   if (!validateTransactions(transactions)) {
     throw new Error("Undefined collection of transactions");
   }
@@ -51,7 +51,9 @@ function singleFunctionTest(transactions) {
   });
 
   //sort the array
-
+  items[1].forEach((entry) => {
+    //move the associated items in the first half of the array, this would definatly be better as an object
+  });
   return items;
 }
 
