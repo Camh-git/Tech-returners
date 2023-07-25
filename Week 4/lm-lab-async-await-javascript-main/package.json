@@ -1,0 +1,26 @@
+{
+  "name": "lm-lab-async-await-javascript",
+  "description": "In this repository you will some exercises on async/await and try/catch.",
+  "version": "1.0.0",
+  "main": "exercise001.js",
+  "type": "module",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techreturners/lm-lab-async-await-javascript.git"
+  },
+  "author": "Tech Returners",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/techreturners/lm-lab-async-await-javascript/issues"
+  },
+  "homepage": "https://github.com/techreturners/lm-lab-async-await-javascript#readme",
+  "dependencies": {
+    "node-fetch": "^3.2.10"
+  }
+}
