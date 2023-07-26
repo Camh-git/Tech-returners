@@ -3,7 +3,6 @@ import "jest";
 
 describe("test translations from arabic to roman", () => {
   test("check that each of the main single chars converts", () => {
-    expect(arrabicToRoman(0)).toBe("Nulla");
     expect(arrabicToRoman(1)).toBe("I");
     expect(arrabicToRoman(5)).toBe("V");
     expect(arrabicToRoman(10)).toBe("X");
@@ -54,5 +53,14 @@ describe("test translations from roman to arabic", () => {
     expect(romanToArabic("IX")).toBe(9);
     expect(romanToArabic("XC")).toBe(90);
     expect(romanToArabic("CMXCIX")).toBe(999);
+  });
+});
+describe("Test edge cases", () => {
+  test("Arabic to roman edge cases", () => {
+    //expect(arrabicToRoman(undefined)).toBe("Nulla"); //Just ran this as a sanity check for the first line of the function, it obviously doesn't accept undefined 😊
+    expect(arrabicToRoman(0)).toBe("Nulla");
+  });
+  test("Roman to arabic edge cases", () => {
+    expect(romanToArabic("Nulla")).toBe(0);
   });
 });
