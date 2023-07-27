@@ -59,8 +59,11 @@ describe("Test edge cases", () => {
   test("Arabic to roman edge cases", () => {
     //expect(arrabicToRoman(undefined)).toBe("Nulla"); //Just ran this as a sanity check for the first line of the function, it obviously doesn't accept undefined 😊
     expect(arrabicToRoman(0)).toBe("Nulla");
+    expect(arrabicToRoman(-1)).toBe("Nulla");
+    expect(arrabicToRoman(999999)).toBe("C̅M̅X̅C̅I̅X̅CMXCIX"); //only doing one of these because figuring out numbers this big is a pain
   });
   test("Roman to arabic edge cases", () => {
     expect(romanToArabic("Nulla")).toBe(0);
+    expect(romanToArabic("-I")).toBe(0);
   });
 });
