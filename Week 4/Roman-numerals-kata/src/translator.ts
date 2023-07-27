@@ -10,7 +10,6 @@ export function arrabicToRoman(input: number) {
   //go through the digits, getting the correct conversion for each digit in each postion
   let output: Array<string> = [];
   for (let i = 0; i < digits.length; i++) {
-    //it seems to be pulling the value from CONVERSIONS.thousands regardless of the value of i
     switch (i) {
       case 0:
         output.push(CONVERSIONS.ones[digits[i]]);
@@ -26,11 +25,13 @@ export function arrabicToRoman(input: number) {
         break;
     }
   }
-
-  return output.toString();
+  return output.reverse().toString().replaceAll(",", "");
 }
 export function romanToArabic(input: string): number {
   if (input == "Nulla") return 0;
+  //figure out how to split this up (good luck)
+
+  //convert using table as above
 
   let output: number = 0;
   return output;
