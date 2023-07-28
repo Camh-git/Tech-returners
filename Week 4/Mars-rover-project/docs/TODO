@@ -1,0 +1,24 @@
+IN PROGRESS
+TESTS
+Test map generation
+try to find edge cases for rover movement(besides the obvious out of bounds)
+
+ASSETS
+add mildly comedic messages for out of bounds and bad terain
+
+    TYPES
+        MAP
+            add option to generate forbidden squares(maybe a param for %?)
+
+        TOOLS
+            figure out a better way of assgining functions
+            (optional) add more tools
+        VEHICLES
+            figure out how to assign tools to vics
+            modify the rover (and other vics in future) declarations to have the inital postions be grid maximums/2 to support variable grid size
+            similarly have returnToOrigin() set the rovers postion to grid maximums/2
+            add out of range and fobidden destination checks to moveRover()
+
+NOT STARTED
+
+FINISHED
