@@ -20,5 +20,6 @@ add mildly comedic messages for out of bounds and bad terain
             add out of range and fobidden destination checks to moveRover()
 
 NOT STARTED
+add rotation/facing directions to the rover
 
 FINISHED
