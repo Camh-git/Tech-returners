@@ -2,9 +2,9 @@ IN PROGRESS
 TESTS
 Test map generation
 try to find edge cases for rover movement(besides the obvious out of bounds)
+Have both rotate and move in the same file if it makes sense
 
 ASSETS
-add mildly comedic messages for out of bounds and bad terain
 
     TYPES
         MAP
@@ -18,8 +18,10 @@ add mildly comedic messages for out of bounds and bad terain
             modify the rover (and other vics in future) declarations to have the inital postions be grid maximums/2 to support variable grid size
             similarly have returnToOrigin() set the rovers postion to grid maximums/2
             add out of range and fobidden destination checks to moveRover()
+            find way to convert moveRover()'s target switch to an arrow function, will let it be const
 
 NOT STARTED
 add rotation/facing directions to the rover
 
 FINISHED
+add mildly comedic messages for out of bounds and bad terain

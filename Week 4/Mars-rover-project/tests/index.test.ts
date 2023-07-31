@@ -1,6 +1,6 @@
 import { defineMap } from "../src/index";
 import { Grid, CoOrdinate } from "../src/Types/Map";
-import { Vehicle, moveRover } from "../src/Types/Vehicles";
+import { Vehicle, moveRover, basicMoveRover } from "../src/Types/Vehicles";
 import * as inputs from "../src/index";
 
 import "jest";
@@ -11,6 +11,8 @@ describe("Test environment", () => {
     //expect(Grid.YMax).toBe(100);
   });
 });
+
+/*Rover movement controls */
 describe("test rover rotation", () => {
   let testRover: Vehicle = {
     postion: [5, 5],
@@ -59,22 +61,39 @@ describe("test rover rotation", () => {
 });
 describe("Test rover movement", () => {
   let testRover: Vehicle = {
-    postion: [5, 5],
+    postion: [1, 1],
     oritentation: "N",
     vicType: "Rover",
     tools: [],
   };
-  test("Test normal rover movement and params", () => {
-    expect(moveRover(1, 1, testRover)).toBe("Success, new co-ordinates: 51,51");
-    expect(moveRover(-1, 0, testRover)).toBe(
-      "Success, new co-ordinates: 50,51"
-    );
-    expect(moveRover(0, -2, testRover)).toBe(
-      "Success, new co-ordinates: 50,49"
-    );
+  let testMap: Grid = { XMax: 5, YMax: 5, blockedTiles: [[4, 4]] };
+  test("Test basic movement in various orientations", () => {
+    testRover.oritentation = "N";
+    basicMoveRover(testRover, testMap);
+    expect(testRover.postion).toStrictEqual([2, 1]);
+
+    testRover.oritentation = "E";
+    basicMoveRover(testRover, testMap);
+    expect(testRover.postion).toStrictEqual([2, 2]);
+
+    testRover.oritentation = "S";
+    basicMoveRover(testRover, testMap);
+    expect(testRover.postion).toStrictEqual([1, 2]);
+
+    testRover.oritentation = "W";
+    basicMoveRover(testRover, testMap);
+    expect(testRover.postion).toStrictEqual([1, 1]);
   });
-  test("Test rover movement in edge cases(eg.going out of bounds)", () => {});
+
+  test("Test rover movement with command strings", () => {});
+  test("Test rover movement in edge cases(eg.going out of bounds)", () => {
+    //bad vic type, out of bounds, forbidden blocks
+  });
 });
+
+/*Extra features*/
+
+describe("Test user input", () => {});
 
 describe("Test switching between vics", () => {});
 

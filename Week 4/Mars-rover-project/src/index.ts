@@ -5,18 +5,20 @@ import { ToolKit, Tool } from "./Types/Tool";
 //This file is used to handle the user input commands and send it off to the appropriate vehicle
 export let signalDelay: number = 0;
 
-export function defineMap(XMax: number, YMax: number) {}
+export function defineMap(XMax: number, YMax: number) {
+  /*Convert user input to a new map*/
+}
 
 export function rotate(movementDirection: string, vic: Vehicle) {
   const DIRECTIONS = ["N", "E", "S", "W"];
-  if (movementDirection == "L") {
+  if (movementDirection === "L") {
     const target = DIRECTIONS.indexOf(vic.oritentation) - 1;
     if (target < 0) {
       vic.oritentation = DIRECTIONS[3];
     } else {
       vic.oritentation = DIRECTIONS[target];
     }
-  } else if (movementDirection == "R") {
+  } else if (movementDirection === "R") {
     const target = DIRECTIONS.indexOf(vic.oritentation) + 1;
     if (target > 3) {
       vic.oritentation = DIRECTIONS[0];
