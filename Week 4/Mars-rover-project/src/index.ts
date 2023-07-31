@@ -6,7 +6,13 @@ import { ToolKit, Tool } from "./Types/Tool";
 export let signalDelay: number = 0;
 export function defineMap(XMax: number, YMax: number) {}
 
-export function rotate(direction: string, vic: rover) {}
+export function rotate(direction: string, vic: rover) {
+  if ((direction = "L")) {
+  } else if ((direction = "R")) {
+  } else {
+    return "Invalid rotation direction, please choose L or R";
+  }
+}
 
 export function move() {
   //Takes the movement command, processes it and sends it to the right vic
