@@ -9,6 +9,10 @@ move("L1", rover);
 return "Test code please ignore";
 ```
 
+## Key features
+
+## Approach
+
 ## Vehicles
 
 A selection of plausable additional vehicles was devised in order to ensure
@@ -37,3 +41,5 @@ The following table lists what tools should be available to each type of vehicle
 | Magnetometer    | Orbiter, Satellite                                  |
 | ShortRangeRadio | Rover, Lander, Helicopter, Plane, Orbiter,Satellite |
 | LongRangeRadio  | Orbiter, Satellite                                  |
+
+## Future thoughts

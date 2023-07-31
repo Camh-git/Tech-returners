@@ -1,20 +1,14 @@
 import { CoOrdinate } from "./Map";
 import { Tool, ToolKit } from "./Tool";
 import { Grid } from "./Map";
-type Vehicle = {
+export type Vehicle = {
   postion: CoOrdinate;
   oritentation: string;
   vicType: string;
   tools: Array<Tool>;
 };
-export interface rover extends Vehicle {
-  postion: [50, 50];
-  oritentation: "N";
-  vicType: "Rover";
-  tools: [];
-}
 //involve direction and moving forward only
-export function moveRover(X: number, Y: number, vic: rover): string {
+export function moveRover(X: number, Y: number, vic: Vehicle): string {
   //Check for out of bounds or bad terain
   if ((!X && !Y) || X === undefined || Y === undefined) {
     return `Please enter at least 1 non zero number and no undefined values. Inputs where: X:${X}, Y:${Y}`;
@@ -33,7 +27,7 @@ export function moveRover(X: number, Y: number, vic: rover): string {
     return `Failed to move with error: ${e}`;
   }
 }
-export function returnToOrigin(vic: rover): string {
+export function returnToOrigin(vic: Vehicle): string {
   try {
     vic.postion[0] = 50;
     vic.postion[1] = 50;

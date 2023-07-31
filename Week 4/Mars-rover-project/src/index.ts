@@ -1,16 +1,31 @@
 import { Grid, CoOrdinate } from "./Types/Map";
-import { rover } from "./Types/Vehicles";
+import { Vehicle } from "./Types/Vehicles";
 import { ToolKit, Tool } from "./Types/Tool";
 
 //This file is used to handle the user input commands and send it off to the appropriate vehicle
 export let signalDelay: number = 0;
+
 export function defineMap(XMax: number, YMax: number) {}
 
-export function rotate(direction: string, vic: rover) {
-  if ((direction = "L")) {
-  } else if ((direction = "R")) {
+export function rotate(movementDirection: string, vic: Vehicle) {
+  const DIRECTIONS = ["N", "E", "S", "W"];
+  if (movementDirection == "L") {
+    const target = DIRECTIONS.indexOf(vic.oritentation) - 1;
+    if (target < 0) {
+      vic.oritentation = DIRECTIONS[3];
+    } else {
+      vic.oritentation = DIRECTIONS[target];
+    }
+  } else if (movementDirection == "R") {
+    const target = DIRECTIONS.indexOf(vic.oritentation) + 1;
+    if (target > 3) {
+      vic.oritentation = DIRECTIONS[0];
+    } else {
+      vic.oritentation = DIRECTIONS[target];
+    }
   } else {
-    return "Invalid rotation direction, please choose L or R";
+    vic.oritentation = movementDirection;
+    console.log("Invalid rotation direction, please choose L or R");
   }
 }
 

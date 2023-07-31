@@ -1,6 +1,6 @@
 import { defineMap } from "../src/index";
 import { Grid, CoOrdinate } from "../src/Types/Map";
-import { rover, moveRover } from "../src/Types/Vehicles";
+import { Vehicle, moveRover } from "../src/Types/Vehicles";
 import * as inputs from "../src/index";
 
 import "jest";
@@ -11,14 +11,15 @@ describe("Test environment", () => {
     //expect(Grid.YMax).toBe(100);
   });
 });
-describe("test rover functions", () => {
-  let testRover: rover = {
-    postion: [50, 50],
+describe("test rover rotation", () => {
+  let testRover: Vehicle = {
+    postion: [5, 5],
     oritentation: "N",
     vicType: "Rover",
     tools: [],
   };
   test("Test rover rotation back and forth", () => {
+    expect(testRover.oritentation).toBe("N"); //sanity check to make sure it's facing the right way first
     inputs.rotate("L", testRover);
     expect(testRover.oritentation).toBe("W");
     inputs.rotate("R", testRover);
@@ -31,7 +32,9 @@ describe("test rover functions", () => {
     inputs.rotate("L", testRover);
     expect(testRover.oritentation).toBe("N");
   });
+
   test("Test turning the rover a full loop left", () => {
+    testRover.oritentation = "N";
     inputs.rotate("L", testRover);
     expect(testRover.oritentation).toBe("W");
     inputs.rotate("L", testRover);
@@ -41,7 +44,9 @@ describe("test rover functions", () => {
     inputs.rotate("L", testRover);
     expect(testRover.oritentation).toBe("N");
   });
+
   test("Test turning the rover a full loop right", () => {
+    testRover.oritentation = "N";
     inputs.rotate("R", testRover);
     expect(testRover.oritentation).toBe("E");
     inputs.rotate("R", testRover);
@@ -51,6 +56,14 @@ describe("test rover functions", () => {
     inputs.rotate("R", testRover);
     expect(testRover.oritentation).toBe("N");
   });
+});
+describe("Test rover movement", () => {
+  let testRover: Vehicle = {
+    postion: [5, 5],
+    oritentation: "N",
+    vicType: "Rover",
+    tools: [],
+  };
   test("Test normal rover movement and params", () => {
     expect(moveRover(1, 1, testRover)).toBe("Success, new co-ordinates: 51,51");
     expect(moveRover(-1, 0, testRover)).toBe(
