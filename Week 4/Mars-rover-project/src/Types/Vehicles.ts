@@ -51,7 +51,7 @@ export function moveRover(rover: Vehicle, map: Grid) {
     return;
   }
   //Find the new target postion
-  let target: CoOrdinate = rover.postion;
+  let target: CoOrdinate = [rover.postion[0], rover.postion[1]];
   switch (rover.oritentation) {
     case "N":
       target[0] += 1;
@@ -67,19 +67,9 @@ export function moveRover(rover: Vehicle, map: Grid) {
       break;
   }
   //Check that the new co-ordinates are allowed before returning
-  //For some reason having these checks call return in the out of bounds results in values being passed back anyway
-  if (target[0] < 0 || target[1] < 0) {
-    target[0] = 0;
-    target[1] = 0;
+  if (checkBoundsOrForbidden(target, map)) {
+    rover.postion = target;
   }
-  if (target[0] > map.XMax || target[1] > map.YMax) {
-    target[0] = map.XMax;
-    target[1] = map.YMax;
-  }
-  if (map.blockedTiles.includes(target)) {
-    target = rover.postion; //For some reason this shorter option doesn't work above
-  }
-  rover.postion = target;
 }
 export function moveLander(lander: Vehicle): string {
   if (lander.vicType !== "Lander") {
