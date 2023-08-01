@@ -10,6 +10,7 @@ import { Grid, CoOrdinate } from "../src/Types/Map";
 /*Rover movement controls */
 describe("test rover rotation", () => {
   let testRover: Vehicle = {
+    name: "testRover",
     postion: [5, 5],
     oritentation: "N",
     vicType: "Rover",
@@ -56,6 +57,7 @@ describe("test rover rotation", () => {
 });
 describe("Test rover movement", () => {
   let testRover: Vehicle = {
+    name: "testRover",
     postion: [1, 1],
     oritentation: "N",
     vicType: "Rover",
@@ -104,6 +106,7 @@ describe("Test rover movement", () => {
 /*Helicopter controls*/
 describe("Test helicopter movement", () => {
   let testChopper: Vehicle = {
+    name: "testChopper",
     postion: [1, 1],
     oritentation: "N",
     vicType: "Helicopter",
@@ -140,6 +143,7 @@ describe("Test helicopter movement", () => {
 /*Lander controls*/
 describe("Test lander functions", () => {
   let testLander: Vehicle = {
+    name: "testLander",
     postion: [1, 1],
     oritentation: "N",
     vicType: "Lander",

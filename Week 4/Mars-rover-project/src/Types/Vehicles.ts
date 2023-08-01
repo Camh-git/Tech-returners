@@ -1,6 +1,7 @@
 import { Tool, ToolKit } from "./Tool";
 import { Grid, CoOrdinate } from "./Map";
 export type Vehicle = {
+  name: string;
   postion: CoOrdinate;
   oritentation: string;
   vicType: string;

@@ -1,16 +1,10 @@
-import { defineMap } from "../src/index";
+import { startUp, listVics } from "../src/index";
 import { Grid, CoOrdinate } from "../src/Types/Map";
-import {
-  Vehicle,
-  moveHelicopter,
-  moveLander,
-  moveRover,
-  rotate,
-} from "../src/Types/Vehicles";
 import * as inputs from "../src/index";
 
 import "jest";
 import exp from "constants";
+import { Vehicle } from "../src/Types/Vehicles";
 
 /*setup map*/
 describe("Test environment", () => {
@@ -37,5 +31,33 @@ describe("Test extra features", () => {
     expect(inputs.signalDelay).toBe(10);
     inputs.delay(-1);
     expect(inputs.signalDelay).toBe(0);
+  });
+  test("List deployed vehicles", () => {
+    const testVics: Array<Vehicle> = [
+      {
+        name: "testLander",
+        postion: [1, 1],
+        oritentation: "N",
+        vicType: "Lander",
+        tools: [],
+      },
+      {
+        name: "testRover",
+        postion: [1, 1],
+        oritentation: "N",
+        vicType: "Rover",
+        tools: [],
+      },
+      {
+        name: "testChopper",
+        postion: [1, 1],
+        oritentation: "N",
+        vicType: "Helicopter",
+        tools: [],
+      },
+    ];
+    expect(listVics(testVics)).toBe(
+      "0:testLander, Lander\n1:testRover, Rover\n2:testChopper, Helicopter\n"
+    );
   });
 });
