@@ -87,7 +87,25 @@ describe("Test rover movement", () => {
 
   test("Test rover movement with command strings", () => {});
   test("Test rover movement in edge cases(eg.going out of bounds)", () => {
-    //bad vic type, out of bounds, forbidden blocks
+    //Won't move wrong vic type
+    testRover.vicType = "Boat";
+    basicMoveRover(testRover, testMap);
+    expect(testRover.postion).toStrictEqual([1, 1]);
+    //Won't go off top of map
+    testRover.vicType = "Rover";
+    testRover.postion = [5, 5];
+    testRover.oritentation = "N";
+    basicMoveRover(testRover, testMap);
+    expect(testRover.postion).toStrictEqual([5, 5]);
+    //Won't go off bottom of map
+    testRover.postion = [0, 0];
+    testRover.oritentation = "S";
+    basicMoveRover(testRover, testMap);
+    expect(testRover.postion).toStrictEqual([0, 0]);
+    //Doesn't move onto forbidden square
+    testRover.postion = [3, 4];
+    basicMoveRover(testRover, testMap);
+    expect(testRover.postion).toStrictEqual([3, 4]);
   });
 });
 
