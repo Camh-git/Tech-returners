@@ -9,28 +9,6 @@ export function defineMap(XMax: number, YMax: number) {
   /*Convert user input to a new map*/
 }
 
-export function rotate(movementDirection: string, vic: Vehicle) {
-  const DIRECTIONS = ["N", "E", "S", "W"];
-  if (movementDirection === "L") {
-    const target = DIRECTIONS.indexOf(vic.oritentation) - 1;
-    if (target < 0) {
-      vic.oritentation = DIRECTIONS[3];
-    } else {
-      vic.oritentation = DIRECTIONS[target];
-    }
-  } else if (movementDirection === "R") {
-    const target = DIRECTIONS.indexOf(vic.oritentation) + 1;
-    if (target > 3) {
-      vic.oritentation = DIRECTIONS[0];
-    } else {
-      vic.oritentation = DIRECTIONS[target];
-    }
-  } else {
-    vic.oritentation = movementDirection;
-    console.log("Invalid rotation direction, please choose L or R");
-  }
-}
-
 export function move() {
   //Takes the movement command, processes it and sends it to the right vic
 }

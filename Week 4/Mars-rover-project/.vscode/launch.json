@@ -10,7 +10,8 @@
       "request": "launch",
       "name": "Run npm start",
       "skipFiles": ["<node_internals>/**"],
-      "outFiles": ["${workspaceFolder}/**/*.js"]
+      "outFiles": ["${workspaceFolder}/**/*.js"],
+      "outputCapture": "std"
     }
   ]
 }

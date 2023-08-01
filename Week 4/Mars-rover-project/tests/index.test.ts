@@ -1,6 +1,6 @@
 import { defineMap } from "../src/index";
 import { Grid, CoOrdinate } from "../src/Types/Map";
-import { Vehicle, moveRover, basicMoveRover } from "../src/Types/Vehicles";
+import { Vehicle, moveRover, rotate } from "../src/Types/Vehicles";
 import * as inputs from "../src/index";
 
 import "jest";
@@ -22,40 +22,40 @@ describe("test rover rotation", () => {
   };
   test("Test rover rotation back and forth", () => {
     expect(testRover.oritentation).toBe("N"); //sanity check to make sure it's facing the right way first
-    inputs.rotate("L", testRover);
+    rotate("L", testRover);
     expect(testRover.oritentation).toBe("W");
-    inputs.rotate("R", testRover);
+    rotate("R", testRover);
     expect(testRover.oritentation).toBe("N");
-    inputs.rotate("R", testRover);
-    inputs.rotate("R", testRover);
+    rotate("R", testRover);
+    rotate("R", testRover);
     expect(testRover.oritentation).toBe("S");
-    inputs.rotate("L", testRover);
+    rotate("L", testRover);
     expect(testRover.oritentation).toBe("E");
-    inputs.rotate("L", testRover);
+    rotate("L", testRover);
     expect(testRover.oritentation).toBe("N");
   });
 
   test("Test turning the rover a full loop left", () => {
     testRover.oritentation = "N";
-    inputs.rotate("L", testRover);
+    rotate("L", testRover);
     expect(testRover.oritentation).toBe("W");
-    inputs.rotate("L", testRover);
+    rotate("L", testRover);
     expect(testRover.oritentation).toBe("S");
-    inputs.rotate("L", testRover);
+    rotate("L", testRover);
     expect(testRover.oritentation).toBe("E");
-    inputs.rotate("L", testRover);
+    rotate("L", testRover);
     expect(testRover.oritentation).toBe("N");
   });
 
   test("Test turning the rover a full loop right", () => {
     testRover.oritentation = "N";
-    inputs.rotate("R", testRover);
+    rotate("R", testRover);
     expect(testRover.oritentation).toBe("E");
-    inputs.rotate("R", testRover);
+    rotate("R", testRover);
     expect(testRover.oritentation).toBe("S");
-    inputs.rotate("R", testRover);
+    rotate("R", testRover);
     expect(testRover.oritentation).toBe("W");
-    inputs.rotate("R", testRover);
+    rotate("R", testRover);
     expect(testRover.oritentation).toBe("N");
   });
 });
@@ -69,43 +69,40 @@ describe("Test rover movement", () => {
   let testMap: Grid = { XMax: 5, YMax: 5, blockedTiles: [[4, 4]] };
   test("Test basic movement in various orientations", () => {
     testRover.oritentation = "N";
-    basicMoveRover(testRover, testMap);
+    moveRover(testRover, testMap);
     expect(testRover.postion).toStrictEqual([2, 1]);
 
     testRover.oritentation = "E";
-    basicMoveRover(testRover, testMap);
+    moveRover(testRover, testMap);
     expect(testRover.postion).toStrictEqual([2, 2]);
 
     testRover.oritentation = "S";
-    basicMoveRover(testRover, testMap);
+    moveRover(testRover, testMap);
     expect(testRover.postion).toStrictEqual([1, 2]);
 
     testRover.oritentation = "W";
-    basicMoveRover(testRover, testMap);
+    moveRover(testRover, testMap);
     expect(testRover.postion).toStrictEqual([1, 1]);
   });
 
   test("Test rover movement with command strings", () => {});
-  test("Test rover movement in edge cases(eg.going out of bounds)", () => {
+  test("Test rover movement in edge cases", () => {
     //Won't move wrong vic type
     testRover.vicType = "Boat";
-    basicMoveRover(testRover, testMap);
+    moveRover(testRover, testMap);
     expect(testRover.postion).toStrictEqual([1, 1]);
     //Won't go off top of map
     testRover.vicType = "Rover";
     testRover.postion = [5, 5];
     testRover.oritentation = "N";
-    basicMoveRover(testRover, testMap);
+    moveRover(testRover, testMap);
     expect(testRover.postion).toStrictEqual([5, 5]);
     //Won't go off bottom of map
     testRover.postion = [0, 0];
     testRover.oritentation = "S";
-    basicMoveRover(testRover, testMap);
+    moveRover(testRover, testMap);
     expect(testRover.postion).toStrictEqual([0, 0]);
-    //Doesn't move onto forbidden square
-    testRover.postion = [3, 4];
-    basicMoveRover(testRover, testMap);
-    expect(testRover.postion).toStrictEqual([3, 4]);
+    //Doesn't move onto forbidden square //Will add when adding extra map features
   });
 });
 

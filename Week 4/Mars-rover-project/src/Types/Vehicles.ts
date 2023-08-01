@@ -17,10 +17,32 @@ export function returnToOrigin(vic: Vehicle): string {
   }
 }
 
+export function rotate(movementDirection: string, vic: Vehicle) {
+  const DIRECTIONS = ["N", "E", "S", "W"];
+  if (movementDirection === "L") {
+    const target = DIRECTIONS.indexOf(vic.oritentation) - 1;
+    if (target < 0) {
+      vic.oritentation = DIRECTIONS[3];
+    } else {
+      vic.oritentation = DIRECTIONS[target];
+    }
+  } else if (movementDirection === "R") {
+    const target = DIRECTIONS.indexOf(vic.oritentation) + 1;
+    if (target > 3) {
+      vic.oritentation = DIRECTIONS[0];
+    } else {
+      vic.oritentation = DIRECTIONS[target];
+    }
+  } else {
+    vic.oritentation = movementDirection;
+    console.log("Invalid rotation direction, please choose L or R");
+  }
+}
+
 /*Vic class specific methods */
 
 //This one is class specific since rovers move differently to aircraft and spacecraft/landers can't be moved
-export function basicMoveRover(rover: Vehicle, map: Grid) {
+export function moveRover(rover: Vehicle, map: Grid) {
   if (rover.vicType !== "Rover") {
     console.log("Error: moveRover is only for rovers");
     return;
@@ -29,10 +51,10 @@ export function basicMoveRover(rover: Vehicle, map: Grid) {
   let target: CoOrdinate = rover.postion;
   switch (rover.oritentation) {
     case "N":
-      target[0]++;
+      target[0] += 1;
       break;
     case "E":
-      target[1]++;
+      target[1] += 1;
       break;
     case "S":
       target[0] -= 1;
@@ -42,37 +64,17 @@ export function basicMoveRover(rover: Vehicle, map: Grid) {
       break;
   }
   //Check that the new co-ordinates are allowed before returning
-  if (
-    target[0] < 0 ||
-    target[1] < 0 ||
-    target[0] > map.XMax ||
-    target[1] > map.YMax
-  ) {
-    return `Error: target co-ordinates out of bounds, movement aborted at position: ${target[0]},${target[1]}`;
+  //For some reason having these checks call return in the out of bounds results in values being passed back anyway
+  if (target[0] < 0 || target[1] < 0) {
+    target[0] = 0;
+    target[1] = 0;
+  }
+  if (target[0] > map.XMax || target[1] > map.YMax) {
+    target[0] = map.XMax;
+    target[1] = map.YMax;
   }
   if (map.blockedTiles.includes(target)) {
-    return `Error: target co-ordinates blocked, movement aborted at position: ${target[0]},${target[1]}`;
+    target = rover.postion; //For some reason this shorter option doesn't work above
   }
   rover.postion = target;
-}
-
-//involve direction and moving forward only
-export function moveRover(X: number, Y: number, vic: Vehicle): string {
-  //Check for out of bounds or bad terain
-  if ((!X && !Y) || X === undefined || Y === undefined) {
-    return `Please enter at least 1 non zero number and no undefined values. Inputs where: X:${X}, Y:${Y}`;
-  }
-  //TODO: add if x or y are bigger than max x or y
-  if (vic.postion[0] - X > 0 || vic.postion[1] - Y > 0) {
-    return "Warning: target postion is out of bounds";
-  }
-
-  //TODO: if the end point is forbidden
-  try {
-    vic.postion[0] += X;
-    vic.postion[1] += Y;
-    return `Success, new co-ordinates: ${vic.postion[0]},${vic.postion[1]}`;
-  } catch (e) {
-    return `Failed to move with error: ${e}`;
-  }
 }
