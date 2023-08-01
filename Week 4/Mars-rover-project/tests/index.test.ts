@@ -3,12 +3,14 @@ import { Grid, CoOrdinate } from "../src/Types/Map";
 import {
   Vehicle,
   moveHelicopter,
+  moveLander,
   moveRover,
   rotate,
 } from "../src/Types/Vehicles";
 import * as inputs from "../src/index";
 
 import "jest";
+import exp from "constants";
 
 /*setup map*/
 describe("Test environment", () => {
@@ -146,7 +148,23 @@ describe("Test helicopter movement", () => {
     expect(testChopper.postion).toStrictEqual([1, 1]);
   });
 });
-
+/*Lander controls*/
+describe("Test lander functions", () => {
+  let testLander: Vehicle = {
+    postion: [1, 1],
+    oritentation: "N",
+    vicType: "Lander",
+    tools: [],
+  };
+  test("Test move lander ", () => {
+    expect(moveLander(testLander)).toBe("Unfortunately, landers cannot move");
+    testLander.vicType = "Boat";
+    expect(moveLander(testLander)).toBe(
+      "Error: moveLander is only for landers"
+    );
+  });
+  test("Use tools on lander", () => {});
+});
 /*Extra features*/
 
 describe("Test user input", () => {});

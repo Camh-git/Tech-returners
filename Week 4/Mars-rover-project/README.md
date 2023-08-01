@@ -22,8 +22,8 @@ control different vehicles in mind.
 The following are the planned vehicles:
 
 - Rover
-- Lander (type defined, but not fully implemented)
-- Helicopter (not yet implemented)
+- Lander (defined, but useless without tools)
+- Helicopter
 - Plane (not yet implemented)
 - Satellite (not yet implemented)
 - Orbiter (not yet implemented)
@@ -43,3 +43,7 @@ The following table lists what tools should be available to each type of vehicle
 | LongRangeRadio  | Orbiter, Satellite                                  |
 
 ## Future thoughts
+
+The following are possible future additions:
+
+- Add the ability to que up movement commands to the rover, or give it a target and have it work it's way there

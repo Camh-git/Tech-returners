@@ -81,6 +81,12 @@ export function moveRover(rover: Vehicle, map: Grid) {
   }
   rover.postion = target;
 }
+export function moveLander(lander: Vehicle): string {
+  if (lander.vicType !== "Lander") {
+    return "Error: moveLander is only for landers";
+  }
+  return "Unfortunately, landers cannot move";
+}
 
 export function moveHelicopter(
   chopper: Vehicle,
