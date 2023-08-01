@@ -7,15 +7,6 @@ export type Vehicle = {
   tools: Array<Tool>;
 };
 /*Generic vic methods*/
-export function returnToOrigin(vic: Vehicle): string {
-  try {
-    vic.postion[0] = 50;
-    vic.postion[1] = 50;
-    return "Success, new co-ordinates: 50,50";
-  } catch (e) {
-    return `Failed to reset position with error: ${e}`;
-  }
-}
 
 export function rotate(movementDirection: string, vic: Vehicle) {
   const DIRECTIONS = ["N", "E", "S", "W"];
@@ -37,6 +28,18 @@ export function rotate(movementDirection: string, vic: Vehicle) {
     vic.oritentation = movementDirection;
     console.log("Invalid rotation direction, please choose L or R");
   }
+}
+function checkBoundsOrForbidden(position: CoOrdinate, map: Grid): Boolean {
+  if (position[0] < 0 || position[1] < 0) {
+    return false;
+  }
+  if (position[0] > map.XMax || position[1] > map.YMax) {
+    return false;
+  }
+  if (map.blockedTiles.includes(position)) {
+    return false;
+  }
+  return true;
 }
 
 /*Vic class specific methods */
@@ -77,4 +80,19 @@ export function moveRover(rover: Vehicle, map: Grid) {
     target = rover.postion; //For some reason this shorter option doesn't work above
   }
   rover.postion = target;
+}
+
+export function moveHelicopter(
+  chopper: Vehicle,
+  target: CoOrdinate,
+  map: Grid
+) {
+  if (chopper.vicType !== "Helicopter") {
+    console.log("Error: moveHelicopter is only for helicopters");
+    return;
+  }
+  //check for out of bounds
+  if (checkBoundsOrForbidden(target, map)) {
+    chopper.postion = target;
+  }
 }

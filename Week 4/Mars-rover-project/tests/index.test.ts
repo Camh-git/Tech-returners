@@ -1,10 +1,16 @@
 import { defineMap } from "../src/index";
 import { Grid, CoOrdinate } from "../src/Types/Map";
-import { Vehicle, moveRover, rotate } from "../src/Types/Vehicles";
+import {
+  Vehicle,
+  moveHelicopter,
+  moveRover,
+  rotate,
+} from "../src/Types/Vehicles";
 import * as inputs from "../src/index";
 
 import "jest";
 
+/*setup map*/
 describe("Test environment", () => {
   test("Ensure the map has generated correctly", () => {
     //expect(Grid.XMax).toBe(100);
@@ -66,7 +72,7 @@ describe("Test rover movement", () => {
     vicType: "Rover",
     tools: [],
   };
-  let testMap: Grid = { XMax: 5, YMax: 5, blockedTiles: [[4, 4]] };
+  const testMap: Grid = { XMax: 5, YMax: 5, blockedTiles: [[4, 4]] };
   test("Test basic movement in various orientations", () => {
     testRover.oritentation = "N";
     moveRover(testRover, testMap);
@@ -103,6 +109,41 @@ describe("Test rover movement", () => {
     moveRover(testRover, testMap);
     expect(testRover.postion).toStrictEqual([0, 0]);
     //Doesn't move onto forbidden square //Will add when adding extra map features
+  });
+});
+/*Helicopter controls*/
+describe("Test helicopter movement", () => {
+  let testChopper: Vehicle = {
+    postion: [1, 1],
+    oritentation: "N",
+    vicType: "Helicopter",
+    tools: [],
+  };
+  const testMap: Grid = { XMax: 5, YMax: 5, blockedTiles: [[4, 4]] };
+  test("Test flying in a loop", () => {
+    moveHelicopter(testChopper, [2, 1], testMap);
+    expect(testChopper.postion).toStrictEqual([2, 1]);
+    moveHelicopter(testChopper, [2, 2], testMap);
+    expect(testChopper.postion).toStrictEqual([2, 2]);
+    moveHelicopter(testChopper, [1, 2], testMap);
+    expect(testChopper.postion).toStrictEqual([1, 2]);
+    moveHelicopter(testChopper, [1, 1], testMap);
+    expect(testChopper.postion).toStrictEqual([1, 1]);
+  });
+  test("Test flying to random positions", () => {
+    moveHelicopter(testChopper, [3, 3], testMap);
+    expect(testChopper.postion).toStrictEqual([3, 3]);
+    moveHelicopter(testChopper, [2, 4], testMap);
+    expect(testChopper.postion).toStrictEqual([2, 4]);
+    moveHelicopter(testChopper, [3, 1], testMap);
+    expect(testChopper.postion).toStrictEqual([3, 1]);
+  });
+  test("Test helicopter movement in edge cases", () => {
+    testChopper.postion = [1, 1];
+    moveHelicopter(testChopper, [-1, -1], testMap);
+    expect(testChopper.postion).toStrictEqual([1, 1]);
+    moveHelicopter(testChopper, [23, 17], testMap);
+    expect(testChopper.postion).toStrictEqual([1, 1]);
   });
 });
 
