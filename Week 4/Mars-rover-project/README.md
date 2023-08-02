@@ -6,10 +6,11 @@ Controlls for the currently implemented vehicles are as follows:
 
 - Rover - L and R to rotate left or right 90 degrees, M to move forward in the direction you are facing
 - Lander - Standard tool commands only
-- Helicopter - M[x,y] where x and y are the x and y co-ordinates of the target landing spot
-- Plane - M[x,y], similar to the helicopter, but at least one block bordering the target must also be clear to land
+- Helicopter - M:x,y where x and y are the x and y co-ordinates of the target landing spot
+- Plane - M:x,y, similar to the helicopter, but at least one block bordering the target must also be clear to land
 - Satellite - Standard tool commands only
-- Orbiter - M[x] where x is the amount you want to move up or down by (think of it as an inclination change)
+- Orbiter - M:x where x is the amount you want to move up or down by (think of it as an inclination change)
+  _Note:_ when moving the helicopter, plane or orbiter it is important that the format be M:x,y or M:x and not M:[x,y] due to the way parseCoOrd behaves
 
 All vehicles can use any of their equiped tools using the command use:toolname, eg: use:Camera
 
@@ -43,6 +44,7 @@ The main features of this application are:
 - Create a map for the rovers to rove on.
 - Move rovers around the map.
 - Manage a group of several types of (semi-credible) vehicles (not fully implemented)
+- Use the tools available to each vehicle (not implemented)
 
 ## Approach
 

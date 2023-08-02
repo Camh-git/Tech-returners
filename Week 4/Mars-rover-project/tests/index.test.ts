@@ -1,16 +1,17 @@
-import { startUp, listVics } from "../src/index";
+import { startUp, listVics, parseCoOrd, switchVic } from "../src/index";
 import { Grid, CoOrdinate } from "../src/Types/Map";
 import * as inputs from "../src/index";
 
 import "jest";
-import exp from "constants";
 import { Vehicle } from "../src/Types/Vehicles";
 
 /*setup map*/
 describe("Test environment", () => {
+  const testMap: Grid = { XMax: 5, YMax: 5, blockedTiles: [[4, 4]] };
   test("Ensure the map has generated correctly", () => {
-    //expect(Grid.XMax).toBe(100);
-    //expect(Grid.YMax).toBe(100);
+    expect(testMap.XMax).toBe(5);
+    expect(testMap.YMax).toBe(5);
+    expect(testMap.blockedTiles).toStrictEqual([[4, 4]]);
   });
 });
 
@@ -32,32 +33,40 @@ describe("Test extra features", () => {
     inputs.setDelay(-1);
     expect(inputs.signalDelay).toBe(0);
   });
+  test("parse coOrd", () => {
+    expect(parseCoOrd("1,2")).toStrictEqual([1, 2]);
+  });
+  const testVics: Array<Vehicle> = [
+    {
+      name: "testLander",
+      position: [1, 1],
+      oritentation: "N",
+      vicType: "Lander",
+      tools: [],
+    },
+    {
+      name: "testRover",
+      position: [1, 1],
+      oritentation: "N",
+      vicType: "Rover",
+      tools: [],
+    },
+    {
+      name: "testChopper",
+      position: [1, 1],
+      oritentation: "N",
+      vicType: "Helicopter",
+      tools: [],
+    },
+  ];
+  let selectedVic: Vehicle = testVics[0];
   test("List deployed vehicles", () => {
-    const testVics: Array<Vehicle> = [
-      {
-        name: "testLander",
-        position: [1, 1],
-        oritentation: "N",
-        vicType: "Lander",
-        tools: [],
-      },
-      {
-        name: "testRover",
-        position: [1, 1],
-        oritentation: "N",
-        vicType: "Rover",
-        tools: [],
-      },
-      {
-        name: "testChopper",
-        position: [1, 1],
-        oritentation: "N",
-        vicType: "Helicopter",
-        tools: [],
-      },
-    ];
     expect(listVics(testVics)).toBe(
       "0:testLander, type: Lander\n1:testRover, type: Rover\n2:testChopper, type: Helicopter\n"
     );
+  });
+  test("Test switch vehicles", () => {
+    switchVic("testChopper", testVics);
+    expect(selectedVic).toBe(testVics[2]);
   });
 });

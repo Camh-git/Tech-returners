@@ -28,7 +28,6 @@ export function startUp(input: string) {
   console.log(`The grid has been set to: ${map.XMax} by ${map.YMax}`);
 
   //Add a default rover and set it as the selected vic
-
   depolyedVics.push({
     name: "Rover1",
     position: [Math.round(map.XMax / 2), Math.round(map.YMax / 2)],
@@ -82,6 +81,18 @@ function proccessInput(input: string) {
   //I'm sure there's a better way to do this, but there's not much time left so i'm going to use the approach I did in space engineers 😊
   //checking for commands that start with a command string followed by a parameter
   input = input.toUpperCase();
+  if (input.includes("M:")) {
+    switch (selectedVic.vicType) {
+      case "Helicopter":
+        Vics.moveHelicopter(selectedVic, parseCoOrd(input), map);
+        break;
+      case "Plane":
+        Vics.movePlane(selectedVic, parseCoOrd(input), map);
+        break;
+      case "Orbiter":
+        break;
+    }
+  }
   if (input.includes("SWITCHVIC:")) {
     switchVic(input.split(":")[1], depolyedVics);
   } else if (input.includes("USE:")) {
@@ -122,6 +133,13 @@ function proccessInput(input: string) {
   if (input != "EXIT") {
     awaitInput();
   }
+}
+export function parseCoOrd(input: string): CoOrdinate {
+  let sides = input.split(",");
+  sides.forEach((entry) => {
+    entry = entry.replace("[]", "");
+  });
+  return [parseInt(sides[0]), parseInt(sides[1])];
 }
 
 export function switchVic(vicName: string, vicList: Array<Vics.Vehicle>) {
