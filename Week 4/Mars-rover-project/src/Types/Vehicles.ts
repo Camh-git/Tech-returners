@@ -7,6 +7,7 @@ export type Vehicle = {
   vicType: string;
   tools: Array<Tool>;
 };
+import { OUT_OF_BOUNDS_MESSAGES } from "../Assets/Out_of_bounds_Messages";
 /*Generic vic methods*/
 
 export function rotate(movementDirection: string, vic: Vehicle) {
@@ -42,6 +43,13 @@ function checkBoundsOrForbidden(position: CoOrdinate, map: Grid): Boolean {
   }
   return true;
 }
+function writeOutOfBoundsMessage() {
+  console.log(
+    OUT_OF_BOUNDS_MESSAGES[
+      Math.floor(Math.random() * OUT_OF_BOUNDS_MESSAGES.length)
+    ]
+  );
+}
 
 /*Vic class specific methods */
 
@@ -70,6 +78,8 @@ export function moveRover(rover: Vehicle, map: Grid) {
   //Check that the new co-ordinates are allowed before returning
   if (checkBoundsOrForbidden(target, map)) {
     rover.postion = target;
+  } else {
+    writeOutOfBoundsMessage();
   }
 }
 export function moveLander(lander: Vehicle): string {
@@ -91,5 +101,7 @@ export function moveHelicopter(
   //check for out of bounds
   if (checkBoundsOrForbidden(target, map)) {
     chopper.postion = target;
+  } else {
+    writeOutOfBoundsMessage();
   }
 }
