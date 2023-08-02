@@ -33,21 +33,17 @@ The following are the planned vehicles:
 - Satellite (not yet implemented)
 - Orbiter (not yet implemented)
 
-All vechiles are defined using the Vehicle type, seen below
+### All vehicles are defined using the Vehicle type, seen below
 
 ```typescript
 export type Vehicle = {
-  name: string;
-  position: CoOrdinate;
-  oritentation: string;
-  vicType: string;
-  tools: Array<Tool>;
+  name: string; //A unique identifier for each vehicle
+  position: CoOrdinate; //The vehicle's location on the grid given as [x,y]
+  oritentation: string; //The direction the vehicle is facing
+  vicType: string; //The type of vehicle the instance is, the options are available above
+  tools: Array<Tool>; //An array of all the tools available to the vehicle
 };
 ```
-
-The "name" value is a unique identifier for each vehicle. Position is the
-vehicle's location on the grid given as [x,y]. vicType is the type of
-vehicle the instance is, the options are available above;
 
 The modes of opperation for each of these vehicles is as follows:
 

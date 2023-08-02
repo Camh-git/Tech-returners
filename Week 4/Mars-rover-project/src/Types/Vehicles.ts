@@ -113,3 +113,5 @@ export function moveHelicopter(
     writeOutOfBoundsMessage();
   }
 }
+
+export function movePlane(plane: Vehicle, target: CoOrdinate, map: Grid) {}
