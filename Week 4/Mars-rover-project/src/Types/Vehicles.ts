@@ -58,6 +58,19 @@ function writeOutOfBoundsMessage() {
     ]
   );
 }
+function findNeighbors(centerPoint: CoOrdinate): Array<CoOrdinate> {
+  //Finds and returns the coOrdinates of the 8 squares surrounding the center point
+  return [
+    [centerPoint[0] - 1, centerPoint[1] + 1],
+    [centerPoint[0], centerPoint[1] + 1],
+    [centerPoint[0] + 1, centerPoint[1] + 1],
+    [centerPoint[0] - 1, centerPoint[1]],
+    [centerPoint[0] + 1, centerPoint[1]],
+    [centerPoint[0] - 1, centerPoint[1] - 1],
+    [centerPoint[0], centerPoint[1] - 1],
+    [centerPoint[0] + 1, centerPoint[1] - 1],
+  ];
+}
 
 /*Vic class specific methods */
 
@@ -114,4 +127,20 @@ export function moveHelicopter(
   }
 }
 
-export function movePlane(plane: Vehicle, target: CoOrdinate, map: Grid) {}
+export function movePlane(plane: Vehicle, target: CoOrdinate, map: Grid) {
+  if (plane.vicType !== "Plane") {
+    console.log("Error: movePlane is only for planes");
+    return;
+  }
+  //check for out of bounds
+  if (checkBoundsOrForbidden(target, map)) {
+    //Look at each neighbour, if one is permited we have a good runway and can go to the target
+    findNeighbors(target).forEach((point) => {
+      if (checkBoundsOrForbidden(point, map)) {
+        plane.position = target;
+        return;
+      }
+    });
+  }
+  writeOutOfBoundsMessage();
+}

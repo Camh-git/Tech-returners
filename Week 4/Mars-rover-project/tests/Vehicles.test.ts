@@ -2,10 +2,12 @@ import {
   Vehicle,
   moveHelicopter,
   moveLander,
+  movePlane,
   moveRover,
   rotate,
 } from "../src/Types/Vehicles";
 import { Grid, CoOrdinate } from "../src/Types/Map";
+import exp from "constants";
 
 /*Rover movement controls */
 describe("test rover rotation", () => {
@@ -140,6 +142,35 @@ describe("Test helicopter movement", () => {
     testChopper.vicType = "Lander";
     moveHelicopter(testChopper, [3, 3], testMap);
     expect(testChopper.position).toStrictEqual([1, 1]);
+  });
+});
+/*Plane controls*/
+describe("Test plane movement", () => {
+  let testPlane: Vehicle = {
+    name: "testPlane",
+    position: [1, 1],
+    oritentation: "N",
+    vicType: "Plane",
+    tools: [],
+  };
+  const testMap: Grid = { XMax: 5, YMax: 5, blockedTiles: [[4, 4]] };
+  test("Fly to random acceptible postions", () => {});
+  movePlane(testPlane, [3, 3], testMap);
+  expect(testPlane.position).toStrictEqual([3, 3]);
+  movePlane(testPlane, [4, 3], testMap);
+  expect(testPlane.position).toStrictEqual([4, 3]);
+  movePlane(testPlane, [1, 2], testMap);
+  expect(testPlane.position).toStrictEqual([1, 2]);
+  test("Try and fly to bad positions", () => {});
+  testPlane.position = [1, 1];
+  movePlane(testPlane, [-3, 3], testMap);
+  expect(testPlane.position).toStrictEqual([1, 1]);
+  movePlane(testPlane, [45, 23], testMap);
+  expect(testPlane.position).toStrictEqual([1, 1]);
+
+  test("Check movement edge cases", () => {
+    testPlane.vicType = "Lander";
+    testPlane.position = [1, 1];
   });
 });
 
