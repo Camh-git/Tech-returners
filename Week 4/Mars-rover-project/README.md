@@ -48,6 +48,16 @@ The main features of this application are:
 
 ## Approach
 
+The application was designed using an itterative test driven development approach.
+
+1.  The process started by sketching out an intial design and thoughts/ notes (see inital design.tif).
+2.  The basic framework of TS jest nodemon and the file structure was set up.
+3.  Tests for the basic functions described in the brief were written.
+4.  Said functions (mainly rover move and rotate) were added and tested until they worked.
+5.  Work begins on additional features, the first of these were additional vehicle types, each following TDD.
+6.  Attempts at handling the user input start, there is some back and forth and it currently isn't perfect but mostly works.
+7.  Further additional features added, including out of bounds messages and tools(WIP).
+
 ## Vehicles
 
 A selection of plausable additional vehicles was devised in order to ensure
@@ -59,7 +69,7 @@ The following are the planned vehicles:
 - Rover
 - Lander (defined, but useless without tools)
 - Helicopter
-- Plane (not yet implemented)
+- Plane
 - Satellite (not yet implemented)
 - Orbiter (not yet implemented)
 

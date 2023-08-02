@@ -1,9 +1,8 @@
 import { startUp, listVics, parseCoOrd, switchVic } from "../src/index";
 import { Grid, CoOrdinate } from "../src/Types/Map";
 import * as inputs from "../src/index";
-
-import "jest";
 import { Vehicle } from "../src/Types/Vehicles";
+import "jest";
 
 /*setup map*/
 describe("Test environment", () => {

@@ -7,7 +7,6 @@ import {
   rotate,
 } from "../src/Types/Vehicles";
 import { Grid, CoOrdinate } from "../src/Types/Map";
-import exp from "constants";
 
 /*Rover movement controls */
 describe("test rover rotation", () => {

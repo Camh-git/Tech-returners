@@ -1,6 +1,6 @@
 import { Grid, CoOrdinate } from "./Types/Map";
 import * as Vics from "./Types/Vehicles";
-import { ToolKit, Tool } from "./Types/Tool";
+import { ToolKit, Tool, vicToolKits } from "./Types/Tool";
 const readline = require("readline");
 
 //This file is used to handle the user input commands and send them to the appropriate vehicle
@@ -33,7 +33,7 @@ export function startUp(input: string) {
     position: [Math.round(map.XMax / 2), Math.round(map.YMax / 2)],
     oritentation: "N",
     vicType: "Rover",
-    tools: [],
+    tools: vicToolKits[0].Tools,
   });
   console.log(
     `Default rover: ${depolyedVics[0].name} deployed at: ${depolyedVics[0].position}`
@@ -164,6 +164,7 @@ export function listVics(vicList: Array<Vics.Vehicle>): string {
 export function addVic() {
   //gets user input for each property and pushes the new object to depolyedVics
   depolyedVics.push();
+  //dont forget to add toolkit
 }
 
 export function listTools() {
