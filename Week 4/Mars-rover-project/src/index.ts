@@ -10,6 +10,7 @@ let depolyedVics: Array<Vics.Vehicle> = [];
 let selectedVic: Vics.Vehicle;
 let map: Grid = { XMax: 0, YMax: 0, blockedTiles: [] };
 let exit = false;
+let waitingForInput = false;
 
 /* Starting up and handling user input */
 const rl = readline.createInterface({
@@ -28,10 +29,26 @@ export function startUp(input: string) {
   }
   console.log(`The grid has been set to: ${map.XMax} by ${map.YMax}`);
 
+  //Add a default rover and set it as the selected vic
+
+  depolyedVics.push({
+    name: "Rover1",
+    position: [Math.round(map.XMax / 2), Math.round(map.YMax / 2)],
+    oritentation: "N",
+    vicType: "Rover",
+    tools: [],
+  });
+  console.log(
+    `Default rover: ${depolyedVics[0].name} deployed at: ${depolyedVics[0].position}`
+  );
+  switchVics("Rover1", depolyedVics);
+
   //Add any forbidden map squares
+  waitingForInput = true;
   rl.question(
     "Please enter any forbidden grid squares in the format x,y with each entry seperated by a colon(:) : ",
     (answer: string) => {
+      rl.close;
       if (answer) {
         answer.split(":").forEach((entry: string) => {
           map.blockedTiles.push([
@@ -44,35 +61,21 @@ export function startUp(input: string) {
       map.blockedTiles.forEach((entry) => {
         console.log(`${entry[0]},${entry[1]}`);
       });
+      awaitInput();
     }
   );
-
-  //Add a default rover and set it as the selected vic
-  depolyedVics.push({
-    name: "Rover1",
-    position: [Math.round(map.XMax / 2), Math.round(map.YMax / 2)],
-    oritentation: "N",
-    vicType: "Rover",
-    tools: [],
-  });
-  console.log(
-    `Default rover: ${depolyedVics[0].name} deployed at: ${depolyedVics[0].position}`
-  );
-  switchVics("Rover1", depolyedVics);
-  awaitInput();
 }
 
 /*Input handling functions*/
 
-export function awaitInput() {
+export async function awaitInput() {
   while (!exit) {
-    console.log(`Please enter a command, current vehicle: ${selectedVic.name}`);
-    rl.question("", (answer: string) => {
+    console.log(`Please enter a command:`);
+    await rl.question("", (answer: string) => {
       //commands without parameters
       switch (answer.toUpperCase()) {
         case "EXIT":
           exit = true;
-          break;
         case "L":
           Vics.rotate("L", selectedVic);
           break;

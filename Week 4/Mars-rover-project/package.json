@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "compile": "tsc",
-    "start": "nodemon src/TestPromptSync.ts",
+    "start": "nodemon src/index.ts",
     "test": "jest --watchAll"
   },
   "keywords": [],
