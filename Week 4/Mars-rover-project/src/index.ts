@@ -9,8 +9,6 @@ type roverInstruction = "L" | "R" | "M";
 let depolyedVics: Array<Vics.Vehicle> = [];
 let selectedVic: Vics.Vehicle;
 let map: Grid = { XMax: 0, YMax: 0, blockedTiles: [] };
-let exit = false;
-let waitingForInput = false;
 
 /* Starting up and handling user input */
 const rl = readline.createInterface({
@@ -41,10 +39,9 @@ export function startUp(input: string) {
   console.log(
     `Default rover: ${depolyedVics[0].name} deployed at: ${depolyedVics[0].position}`
   );
-  switchVics("Rover1", depolyedVics);
+  selectedVic = depolyedVics[0];
 
   //Add any forbidden map squares
-  waitingForInput = true;
   rl.question(
     "Please enter any forbidden grid squares in the format x,y with each entry seperated by a colon(:) : ",
     (answer: string) => {
@@ -58,6 +55,9 @@ export function startUp(input: string) {
         });
       }
       console.log("The following forbidden blocks where added:");
+      if (map.blockedTiles.length === 0) {
+        console.log("None");
+      }
       map.blockedTiles.forEach((entry) => {
         console.log(`${entry[0]},${entry[1]}`);
       });
@@ -68,39 +68,48 @@ export function startUp(input: string) {
 
 /*Input handling functions*/
 
-export async function awaitInput() {
-  while (!exit) {
-    console.log(`Please enter a command:`);
-    await rl.question("", (answer: string) => {
-      //commands without parameters
-      switch (answer.toUpperCase()) {
-        case "EXIT":
-          exit = true;
-        case "L":
-          Vics.rotate("L", selectedVic);
+export function awaitInput() {
+  const commandIn = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  commandIn.question("Please enter a command:", (answer: string) => {
+    commandIn.close();
+    proccessInput(answer);
+  });
+}
+
+function proccessInput(input: string) {
+  //I'm sure there's a better way to do this, but there's not much time left so i'm going to use the approach I did in space engineers 😊
+  switch (input.toUpperCase()) {
+    case "EXIT":
+      break;
+    case "L":
+      Vics.rotate("L", selectedVic);
+      break;
+    case "R":
+      Vics.rotate("R", selectedVic);
+      break;
+    case "M":
+      switch (selectedVic.vicType) {
+        case "Rover":
+          Vics.moveRover(selectedVic, map);
           break;
-        case "R":
-          Vics.rotate("R", selectedVic);
+        case "Helicopter":
           break;
-        case "M":
-          switch (selectedVic.vicType) {
-            case "Rover":
-              Vics.moveRover(selectedVic, map);
-              break;
-            case "Helicopter":
-              break;
-            case "Plane":
-              break;
-          }
-          break;
-        case "LISTVICS":
-        case "LIST":
-        case "VEHICLES":
-        case "VICLIST":
-          console.log(listVics(depolyedVics));
+        case "Plane":
           break;
       }
-    });
+      break;
+    case "LISTVICS":
+    case "LIST":
+    case "VEHICLES":
+    case "VICLIST":
+      console.log(listVics(depolyedVics));
+      break;
+  }
+  if (input.toUpperCase() != "EXIT") {
+    awaitInput();
   }
 }
 
