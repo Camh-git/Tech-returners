@@ -2,6 +2,28 @@
 
 ## Basic controls
 
+Controlls for the currently implemented vehicles are as follows:
+
+- Rover - L and R to rotate left or right 90 degrees, M to move forward in the direction you are facing
+- Lander - Standard tool commands only
+- Helicopter - M[x,y] where x and y are the x and y co-ordinates of the target landing spot
+- Plane - M[x,y], similar to the helicopter, but at least one block bordering the target must also be clear to land
+- Satellite - Standard tool commands only
+- Orbiter - M[x] where x is the amount you want to move up or down by (think of it as an inclination change)
+
+All vehicles can use any of their equiped tools using the command use:toolname, eg: use:Camera
+
+#### The following console/management commands are also available:
+
+- listVic/ListVics - prints a list of all currently available vehicles
+- addVic - starts a series of commands to add a new vehicle to the pool (not yet implemented)
+- switchVic:name - changes the currently selected vehicle to the vehicle with a matching name (currently has bugs)
+- use:tool - uses the named tool
+- listTools - lists all tools on the currently selected vehicle
+- help - provides general user help about the system
+- help:vicType - provides help regarding the specified vehicle type
+- exit - exits the programm
+
 ## Program flow
 
 The program starts as required in the brief, the user defines the size of the map.
@@ -15,6 +37,12 @@ list and swap between vehicles (WIP).
 The user will also be able to list and use the tools on their selected vehicle(WIP).
 
 ## Key features
+
+The main features of this application are:
+
+- Create a map for the rovers to rove on.
+- Move rovers around the map.
+- Manage a group of several types of (semi-credible) vehicles (not fully implemented)
 
 ## Approach
 
@@ -73,4 +101,5 @@ The following table lists what tools should be available to each type of vehicle
 The following are possible future additions:
 
 - Add the ability to que up movement commands to the rover, or give it a target and have it work it's way there
+- finish implementing the forbidden blocks system, preferably with a system to randomly generate them
 - Add a Web UI, the intial setp would likely be a simple display with the same inputs as the console version

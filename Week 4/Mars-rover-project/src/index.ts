@@ -3,7 +3,7 @@ import * as Vics from "./Types/Vehicles";
 import { ToolKit, Tool } from "./Types/Tool";
 const readline = require("readline");
 
-//This file is used to handle the user input commands and send it off to the appropriate vehicle
+//This file is used to handle the user input commands and send them to the appropriate vehicle
 export let signalDelay: number = 0;
 type roverInstruction = "L" | "R" | "M";
 let depolyedVics: Array<Vics.Vehicle> = [];
@@ -67,7 +67,6 @@ export function startUp(input: string) {
 }
 
 /*Input handling functions*/
-
 export function awaitInput() {
   const commandIn = readline.createInterface({
     input: process.stdin,
@@ -81,9 +80,21 @@ export function awaitInput() {
 
 function proccessInput(input: string) {
   //I'm sure there's a better way to do this, but there's not much time left so i'm going to use the approach I did in space engineers 😊
-  switch (input.toUpperCase()) {
-    case "EXIT":
-      break;
+  //checking for commands that start with a command string followed by a parameter
+  input = input.toUpperCase();
+  if (input.includes("SWITCHVIC:")) {
+    switchVic(input.split(":")[1], depolyedVics);
+  } else if (input.includes("USE:")) {
+    useTool(input.split(":")[1]);
+  } else if (input.includes("DELAY:")) {
+    setDelay(parseInt(input.split(":")[1]));
+  } else if (input.includes("HELP:")) {
+    vicHelp(input.split(":")[1]);
+  }
+
+  //Commands without parameters
+  switch (input) {
+    //Control commands
     case "L":
       Vics.rotate("L", selectedVic);
       break;
@@ -91,47 +102,44 @@ function proccessInput(input: string) {
       Vics.rotate("R", selectedVic);
       break;
     case "M":
-      switch (selectedVic.vicType) {
-        case "Rover":
-          Vics.moveRover(selectedVic, map);
-          break;
-        case "Helicopter":
-          break;
-        case "Plane":
-          break;
+      if (selectedVic.vicType === "Rover") {
+        Vics.moveRover(selectedVic, map);
       }
       break;
+
+    //Mangement commands
+    case "EXIT":
+      break;
     case "LISTVICS":
-    case "LIST":
-    case "VEHICLES":
-    case "VICLIST":
+    case "LISTVIC":
       console.log(listVics(depolyedVics));
       break;
+    case "ADDVIC":
+      addVic();
+    case "LISTTOOLS":
+      console.log(listTools());
   }
-  if (input.toUpperCase() != "EXIT") {
+  if (input != "EXIT") {
     awaitInput();
   }
 }
 
-export function move() {
-  //Takes the movement command, processes it and sends it to the right vic
-}
-
-export function switchVics(vicName: string, vicList: Array<Vics.Vehicle>) {
+export function switchVic(vicName: string, vicList: Array<Vics.Vehicle>) {
   //swaps the active vic with the input vic
   vicList.forEach((vic) => {
-    if (vic.name === "vicName") {
+    if (vic.name.toUpperCase() === vicName.toUpperCase()) {
       selectedVic = vic;
       return;
     }
   });
+  console.log(`ERROR: No vehicle with the name: ${vicName} was found`);
 }
 
 export function listVics(vicList: Array<Vics.Vehicle>): string {
   //lists all vehicles in the given array, returns a string so it can be tested
   let list: string = "";
   vicList.forEach((vic) => {
-    list += `${vicList.indexOf(vic)}:${vic.name}, ${vic.vicType}\n`;
+    list += `${vicList.indexOf(vic)}:${vic.name}, type: ${vic.vicType}\n`;
   });
   return list;
 }
@@ -141,11 +149,15 @@ export function addVic() {
 }
 
 export function listTools() {
-  //Lists the tools available to the selected vehicle
+  let list: string = "";
+  selectedVic.tools.forEach((entry) => {
+    list += `${entry},`;
+  });
+  return list;
 }
-export function useTool(tool: Tool) {}
+export function useTool(tool: string) {}
 
-export function delay(length: number) {
+export function setDelay(length: number) {
   //Changes the signal delay, set to 0 by default for usability, for realism (and pain) set to 1260
   if (length < 0) {
     signalDelay = 0;
@@ -153,5 +165,5 @@ export function delay(length: number) {
     signalDelay = length;
   }
 }
-export function vicHelp(type: Vics.Vehicle) {}
+export function vicHelp(type: string) {}
 export function help() {}

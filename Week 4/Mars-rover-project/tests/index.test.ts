@@ -25,11 +25,11 @@ describe("Test using tools", () => {});
 describe("Test extra features", () => {
   test("test signal delay change function", () => {
     expect(inputs.signalDelay).toBe(0);
-    inputs.delay(1);
+    inputs.setDelay(1);
     expect(inputs.signalDelay).toBe(1);
-    inputs.delay(10);
+    inputs.setDelay(10);
     expect(inputs.signalDelay).toBe(10);
-    inputs.delay(-1);
+    inputs.setDelay(-1);
     expect(inputs.signalDelay).toBe(0);
   });
   test("List deployed vehicles", () => {
@@ -57,7 +57,7 @@ describe("Test extra features", () => {
       },
     ];
     expect(listVics(testVics)).toBe(
-      "0:testLander, Lander\n1:testRover, Rover\n2:testChopper, Helicopter\n"
+      "0:testLander, type: Lander\n1:testRover, type: Rover\n2:testChopper, type: Helicopter\n"
     );
   });
 });
