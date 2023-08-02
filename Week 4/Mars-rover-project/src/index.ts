@@ -46,17 +46,18 @@ export function startUp(input: string) {
     }
   );
 
-  //Add a default rover
+  //Add a default rover and set it as the selected vic
   depolyedVics.push({
     name: "Rover1",
-    postion: [Math.round(map.XMax / 2), Math.round(map.YMax / 2)],
+    position: [Math.round(map.XMax / 2), Math.round(map.YMax / 2)],
     oritentation: "N",
     vicType: "Rover",
     tools: [],
   });
   console.log(
-    `Default rover: ${depolyedVics[0].name} deployed at: ${depolyedVics[0].postion}`
+    `Default rover: ${depolyedVics[0].name} deployed at: ${depolyedVics[0].position}`
   );
+  switchVics("Rover1", depolyedVics);
 }
 
 export function move() {
@@ -80,6 +81,7 @@ export function listVics(vicList: Array<Vehicle>): string {
   });
   return list;
 }
+export function addVic() {}
 
 export function listTools() {
   //Lists the tools available to the selected vehicle
@@ -94,3 +96,5 @@ export function delay(length: number) {
     signalDelay = length;
   }
 }
+export function vicHelp(type: Vehicle) {}
+export function help() {}

@@ -36,21 +36,21 @@ describe("Test extra features", () => {
     const testVics: Array<Vehicle> = [
       {
         name: "testLander",
-        postion: [1, 1],
+        position: [1, 1],
         oritentation: "N",
         vicType: "Lander",
         tools: [],
       },
       {
         name: "testRover",
-        postion: [1, 1],
+        position: [1, 1],
         oritentation: "N",
         vicType: "Rover",
         tools: [],
       },
       {
         name: "testChopper",
-        postion: [1, 1],
+        position: [1, 1],
         oritentation: "N",
         vicType: "Helicopter",
         tools: [],

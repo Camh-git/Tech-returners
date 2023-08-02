@@ -1,13 +1,21 @@
 import { Tool, ToolKit } from "./Tool";
 import { Grid, CoOrdinate } from "./Map";
+import { OUT_OF_BOUNDS_MESSAGES } from "../Assets/Out_of_bounds_Messages";
 export type Vehicle = {
   name: string;
-  postion: CoOrdinate;
+  position: CoOrdinate;
   oritentation: string;
-  vicType: string;
+  vicType: Vic_options;
   tools: Array<Tool>;
 };
-import { OUT_OF_BOUNDS_MESSAGES } from "../Assets/Out_of_bounds_Messages";
+type Vic_options =
+  | "Rover"
+  | "Lander"
+  | "Helicopter"
+  | "Plane"
+  | "Satellite"
+  | "Orbiter";
+
 /*Generic vic methods*/
 
 export function rotate(movementDirection: string, vic: Vehicle) {
@@ -60,7 +68,7 @@ export function moveRover(rover: Vehicle, map: Grid) {
     return;
   }
   //Find the new target postion
-  let target: CoOrdinate = [rover.postion[0], rover.postion[1]];
+  let target: CoOrdinate = [rover.position[0], rover.position[1]];
   switch (rover.oritentation) {
     case "N":
       target[0] += 1;
@@ -77,7 +85,7 @@ export function moveRover(rover: Vehicle, map: Grid) {
   }
   //Check that the new co-ordinates are allowed before returning
   if (checkBoundsOrForbidden(target, map)) {
-    rover.postion = target;
+    rover.position = target;
   } else {
     writeOutOfBoundsMessage();
   }
@@ -100,7 +108,7 @@ export function moveHelicopter(
   }
   //check for out of bounds
   if (checkBoundsOrForbidden(target, map)) {
-    chopper.postion = target;
+    chopper.position = target;
   } else {
     writeOutOfBoundsMessage();
   }
