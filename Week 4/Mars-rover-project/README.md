@@ -14,6 +14,14 @@ Controlls for the currently implemented vehicles are as follows:
 
 All vehicles can use any of their equiped tools using the command use:toolname, eg: use:Camera
 
+```node.js
+  > L //Rotate rover left
+  > R //Rotate rover right
+  > M //Move rover forward
+  > M:4,5 // Helicopter/plane
+  > M:5 //Move orbiter
+```
+
 #### The following console/management commands are also available:
 
 - listVic/ListVics - prints a list of all currently available vehicles
@@ -70,8 +78,8 @@ The following are the planned vehicles:
 - Lander (defined, but useless without tools)
 - Helicopter
 - Plane
-- Satellite (not yet implemented)
-- Orbiter (not yet implemented)
+- Satellite
+- Orbiter
 
 ### All vehicles are defined using the Vehicle type, seen below
 
