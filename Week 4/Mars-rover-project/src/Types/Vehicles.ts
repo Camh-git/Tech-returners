@@ -144,3 +144,22 @@ export function movePlane(plane: Vehicle, target: CoOrdinate, map: Grid) {
   }
   writeOutOfBoundsMessage();
 }
+/* Orbiter controls*/
+export function moveOrbiter(orbiter: Vehicle, target: CoOrdinate, map: Grid) {
+  if (orbiter.vicType !== "Orbiter") {
+    console.log("Error: moveOrbiter is only for orbiters");
+    return;
+  }
+  //Dont let the user change the Y axis position
+  if (target[1] !== orbiter.position[1]) {
+    console.log(
+      "Error: target requireds and orbital period change, but only inclination changes are allowed, we're not made of money"
+    );
+    return;
+  }
+  if (checkBoundsOrForbidden(target, map)) {
+    orbiter.position[0] = target[0];
+  } else {
+    writeOutOfBoundsMessage();
+  }
+}

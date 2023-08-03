@@ -18,10 +18,6 @@ describe("Test environment", () => {
 
 describe("Test user input", () => {});
 
-describe("Test switching between vics", () => {});
-
-describe("Test using tools", () => {});
-
 describe("Test extra features", () => {
   test("test signal delay change function", () => {
     expect(inputs.signalDelay).toBe(0);

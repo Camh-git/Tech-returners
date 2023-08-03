@@ -5,6 +5,7 @@ import {
   movePlane,
   moveRover,
   rotate,
+  moveOrbiter,
 } from "../src/Types/Vehicles";
 import { Grid, CoOrdinate } from "../src/Types/Map";
 
@@ -190,4 +191,40 @@ describe("Test lander functions", () => {
     );
   });
   test("Use tools on lander", () => {});
+});
+/* Orbiter controls */
+describe("Test the orbiter's functions", () => {
+  let testOrbiter: Vehicle = {
+    name: "testOrbiter",
+    position: [1, 1],
+    oritentation: "N",
+    vicType: "Orbiter",
+    tools: [],
+  };
+  const testMap: Grid = { XMax: 5, YMax: 5, blockedTiles: [[4, 4]] };
+  test("Move orbiter sensibly", () => {
+    moveOrbiter(testOrbiter, [2, 1], testMap);
+    expect(testOrbiter.position).toStrictEqual([2, 1]);
+    moveOrbiter(testOrbiter, [5, 1], testMap);
+    expect(testOrbiter.position).toStrictEqual([5, 1]);
+  });
+  test("Try moving orbiter on Y axis", () => {
+    testOrbiter.position = [1, 1];
+    moveOrbiter(testOrbiter, [1, 2], testMap);
+    expect(testOrbiter.position).toStrictEqual([1, 1]);
+    moveOrbiter(testOrbiter, [1, 5], testMap);
+    expect(testOrbiter.position).toStrictEqual([1, 1]);
+  });
+  test("Test edge cases", () => {
+    testOrbiter.position = [1, 1];
+    //Out of bounds
+    moveOrbiter(testOrbiter, [-1, -1], testMap);
+    expect(testOrbiter.position).toStrictEqual([1, 1]);
+    moveOrbiter(testOrbiter, [37, 24], testMap);
+    expect(testOrbiter.position).toStrictEqual([1, 1]);
+    //bad vic type
+    testOrbiter.vicType = "Lander";
+    moveOrbiter(testOrbiter, [3, 3], testMap);
+    expect(testOrbiter.position).toStrictEqual([1, 1]);
+  });
 });

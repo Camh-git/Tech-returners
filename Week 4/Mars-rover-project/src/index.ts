@@ -90,6 +90,7 @@ function proccessInput(input: string) {
         Vics.movePlane(selectedVic, parseCoOrd(input), map);
         break;
       case "Orbiter":
+        Vics.moveOrbiter(selectedVic, parseCoOrd(input), map);
         break;
     }
   }
@@ -104,31 +105,38 @@ function proccessInput(input: string) {
   }
 
   //Commands without parameters
-  switch (input) {
-    //Control commands
-    case "L":
-      Vics.rotate("L", selectedVic);
-      break;
-    case "R":
-      Vics.rotate("R", selectedVic);
-      break;
-    case "M":
-      if (selectedVic.vicType === "Rover") {
-        Vics.moveRover(selectedVic, map);
-      }
-      break;
+  else {
+    switch (input) {
+      //Control commands
+      case "L":
+        Vics.rotate("L", selectedVic);
+        break;
+      case "R":
+        Vics.rotate("R", selectedVic);
+        break;
+      case "M":
+        if (selectedVic.vicType === "Rover") {
+          Vics.moveRover(selectedVic, map);
+        }
+        break;
 
-    //Mangement commands
-    case "EXIT":
-      break;
-    case "LISTVICS":
-    case "LISTVIC":
-      console.log(listVics(depolyedVics));
-      break;
-    case "ADDVIC":
-      addVic();
-    case "LISTTOOLS":
-      console.log(listTools());
+      //Mangement commands
+      case "EXIT":
+        break;
+      case "LISTVICS":
+      case "LISTVIC":
+        console.log(listVics(depolyedVics));
+        break;
+      case "ADDVIC":
+        addVic();
+      case "LISTTOOLS":
+        console.log(listTools());
+      case "HELP":
+        help();
+      default:
+        console.log(`Invalid input: ${input},use help for a list of commands`);
+        break;
+    }
   }
   if (input != "EXIT") {
     awaitInput();

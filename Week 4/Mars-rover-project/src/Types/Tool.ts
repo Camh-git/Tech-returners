@@ -1,4 +1,4 @@
-import { signalDelay } from "src";
+import { signalDelay } from "../index";
 //compatableVics is everything the tool can be installed on(eg.["rover","helicopter"]), function is the function an instance should call when used(eg."takePicture()")
 export type Tool = {
   name: string;
