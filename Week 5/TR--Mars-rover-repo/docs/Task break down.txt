@@ -1,0 +1,21 @@
+setup ts enviro
+setup file structure(from reading brief: add src folder with code, tests folder and prob a types folder)
+create map
+implement a rover type (make a generic vic type for expandability)
+add tests for map/rover and it's movement
+write code to implement the rotation and movement functions
+test and retest until they work
+MVP here <-----------
+try and get user input
+
+extra:
+implent a tool type, make sure the rovers have a list of tools
+add ui, prob web, but maybe investigate less code heavy options
+add signal delay
+mildly comedic out of bounds messages
+
+notes:
+have out of bounds checks for anything that moves
+if u do add signal delay set default to 0, ppl wont appreciate waiting 20 mins
+keep a todo so you dont forget small details that need fixing ffs
+REMEMBER- a readme is needed, go to the guides to make it look good

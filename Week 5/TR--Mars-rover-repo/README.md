@@ -1,5 +1,9 @@
 # Intro
 
+Welcome to my mars rover task, here you till find the basic requirements from the brief with all the tests passing.
+You will also find several additional vehicle types and tools to equip them (and hopefully an functional interface to control them).
+So please feel free to have a look around, hopefully this file serve as a good guide, and remember to drive safe.
+
 ## Basic controls
 
 Controlls for the currently implemented vehicles are as follows:
@@ -26,7 +30,7 @@ All vehicles can use any of their equiped tools using the command use:toolname, 
 
 - listVic/ListVics - prints a list of all currently available vehicles
 - addVic - starts a series of commands to add a new vehicle to the pool (not yet implemented)
-- switchVic:name - changes the currently selected vehicle to the vehicle with a matching name (currently has bugs)
+- switchVic:name - changes the currently selected vehicle to the vehicle with a matching name
 - use:tool - uses the named tool
 - listTools - lists all tools on the currently selected vehicle
 - help - provides general user help about the system

@@ -3,6 +3,11 @@ Add more input validation
 TESTS
 try to find edge cases for rover movement(besides the obvious out of bounds)
 
+INPUT
+input validations
+add inital position choice to rover
+fix switch vics
+
 ASSETS
 
     TYPES
@@ -13,10 +18,9 @@ ASSETS
             (optional) add more tools
         VEHICLES
             figure out how to assign tools to vics
-            modify the rover (and other vics in future) declarations to have the inital postions be grid maximums/2 to support variable grid size
             find way to convert moveRover()'s target switch to an arrow function, will let it be const
             figure out why switchvic cant find anything
-
+            rover colision
 
 NOT STARTED
 
@@ -25,6 +29,7 @@ add mildly comedic messages for out of bounds and bad terain
 refactor moveRover's out of bounds checks to something less verbose(if reasons for odd return/asign behaviour can be found) (was changed to seperate function for all vics)
 add out of range and fobidden destination checks to moveRover()
 Have both rotate and move in the same file if it makes sense
+modify the rover (and other vics in future) declarations to have the inital postions be grid maximums/2 to support variable grid size (removed to add command position)
 add rotation/facing directions to the rover
 Test map generation
 add option to generate forbidden squares(maybe a param for %?)

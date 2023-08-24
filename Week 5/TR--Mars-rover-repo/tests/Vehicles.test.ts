@@ -9,6 +9,8 @@ import {
 } from "../src/Types/Vehicles";
 import { Grid, CoOrdinate } from "../src/Types/Map";
 
+/*Declaring a test map for all the movement tests to share(they where using the same one so DRY  😊 ) */
+const testMap: Grid = { XMax: 5, YMax: 5, blockedTiles: [[4, 4]] };
 /*Rover movement controls */
 describe("test rover rotation", () => {
   let testRover: Vehicle = {
@@ -57,6 +59,52 @@ describe("test rover rotation", () => {
     expect(testRover.oritentation).toBe("N");
   });
 });
+
+describe("Rover deployment test", () => {
+  test("Make sure we can deploy rovers at any (legal) postion", () => {
+    let TestRover1: Vehicle = {
+      name: "TestRover1",
+      position: [5, 5],
+      oritentation: "N",
+      vicType: "Rover",
+      tools: [],
+    };
+    let TestRover2: Vehicle = {
+      name: "TestRover2",
+      position: [3, 3],
+      oritentation: "N",
+      vicType: "Rover",
+      tools: [],
+    };
+    let TestRover3: Vehicle = {
+      name: "TestRover3",
+      position: [1, 1],
+      oritentation: "N",
+      vicType: "Rover",
+      tools: [],
+    };
+    let TestRover4: Vehicle = {
+      name: "TestRover4",
+      position: [2, 3],
+      oritentation: "N",
+      vicType: "Rover",
+      tools: [],
+    };
+    let TestRover5: Vehicle = {
+      name: "TestRover5",
+      position: [5, 4],
+      oritentation: "N",
+      vicType: "Rover",
+      tools: [],
+    };
+    expect(TestRover1.position).toStrictEqual([5, 5]);
+    expect(TestRover2.position).toStrictEqual([3, 3]);
+    expect(TestRover3.position).toStrictEqual([1, 1]);
+    expect(TestRover4.position).toStrictEqual([2, 3]);
+    expect(TestRover5.position).toStrictEqual([5, 4]);
+  });
+});
+
 describe("Test rover movement", () => {
   let testRover: Vehicle = {
     name: "testRover",
@@ -65,7 +113,6 @@ describe("Test rover movement", () => {
     vicType: "Rover",
     tools: [],
   };
-  const testMap: Grid = { XMax: 5, YMax: 5, blockedTiles: [[4, 4]] };
   test("Test basic movement in various orientations", () => {
     testRover.oritentation = "N";
     moveRover(testRover, testMap);
@@ -114,7 +161,6 @@ describe("Test helicopter movement", () => {
     vicType: "Helicopter",
     tools: [],
   };
-  const testMap: Grid = { XMax: 5, YMax: 5, blockedTiles: [[4, 4]] };
   test("Test flying in a loop", () => {
     moveHelicopter(testChopper, [2, 1], testMap);
     expect(testChopper.position).toStrictEqual([2, 1]);
@@ -144,6 +190,7 @@ describe("Test helicopter movement", () => {
     expect(testChopper.position).toStrictEqual([1, 1]);
   });
 });
+
 /*Plane controls*/
 describe("Test plane movement", () => {
   let testPlane: Vehicle = {
@@ -153,7 +200,6 @@ describe("Test plane movement", () => {
     vicType: "Plane",
     tools: [],
   };
-  const testMap: Grid = { XMax: 5, YMax: 5, blockedTiles: [[4, 4]] };
   test("Fly to random acceptible postions", () => {});
   movePlane(testPlane, [3, 3], testMap);
   expect(testPlane.position).toStrictEqual([3, 3]);
@@ -201,7 +247,6 @@ describe("Test the orbiter's functions", () => {
     vicType: "Orbiter",
     tools: [],
   };
-  const testMap: Grid = { XMax: 5, YMax: 5, blockedTiles: [[4, 4]] };
   test("Move orbiter sensibly", () => {
     moveOrbiter(testOrbiter, [2, 1], testMap);
     expect(testOrbiter.position).toStrictEqual([2, 1]);
