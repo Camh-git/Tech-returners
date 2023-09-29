@@ -1,4 +1,5 @@
-#Tech returners
+#Tech returners.
+
 ##A repo for my work on the tech returners program, organised by week
 
 ## Final project
