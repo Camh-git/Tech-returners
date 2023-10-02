@@ -1,0 +1,92 @@
+/*Structure*/
+.cardContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+.card {
+  width: 25vw;
+  margin: 5vh;
+  border-radius: 15%;
+  border-style: solid;
+  text-align: center;
+}
+
+.card__header {
+  text-decoration: underline;
+  font-size: 2rem;
+}
+
+.card__img {
+  border-radius: 25%;
+  width: 60%;
+  height: 15vh;
+  max-width: 300px;
+  max-height: 150px;
+}
+
+.card__txt {
+  font-size: 1.25rem;
+  font-weight: 200;
+}
+
+.card__btn {
+  border: 5px solid black;
+  border-radius: 25%;
+}
+
+/*Media rules*/
+@media screen and (max-width: 400px) {
+  .cardContainer {
+    flex-wrap: wrap;
+  }
+  .card {
+    width: 75vw;
+  }
+  .card__btn {
+    margin: 0;
+    width: 50vw;
+    height: 15vh;
+  }
+}
+@media screen and (min-width: 401px) {
+  .card__btn {
+    margin: 1vh;
+    width: 10vw;
+    height: 5vw;
+  }
+}
+/*Skins*/
+.card--lightSide {
+  background-color: lightgreen;
+  border-color: silver;
+  box-shadow: 10px 5px 5px #fff5b3;
+}
+.card__btn--lightSide {
+  background-color: #fff5b3;
+}
+.card--darkSide {
+  background-color: maroon;
+  border-color: black;
+  box-shadow: 10px 5px 5px #d24b4b;
+}
+.card__btn--darkSide {
+  background-color: #d24b4b;
+}
+.card--noForce {
+  background-color: lightblue;
+  border-color: #ffa500;
+}
+.card__btn--noForce {
+  background-color: #ffffff;
+  border-style: double;
+  border-color: #ffa500;
+}
+.card--droid {
+  background-color: silver;
+  border-color: #daa520;
+}
+.card__btn--droid {
+  background-color: #239357;
+  color: #ffffff;
+  border-style: dashed;
+}

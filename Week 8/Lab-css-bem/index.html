@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>BEM Notation & OOCSS: Writing scaleable CSS</title>
+  </head>
+
+  <body>
+    <h1>BEM Wars</h1>
+    <div class="cardContainer">
+      <div class="card card--darkSide">
+        <h2 class="card__header">The Dark Side</h2>
+        <img src="./images/vader.jpeg" class="card__img" />
+        <section class="card__txt">
+          <p>Nesting!</p>
+          <p>Conflict!</p>
+          <p>Specificity Wars!</p>
+          <p>Cookies</p>
+        </section>
+        <button class="card__btn card__btn--darkSide">Warning</button>
+      </div>
+
+      <div class="card card--lightSide">
+        <h2 class="card__header">The Force</h2>
+        <img src="./images/yoda.jpeg" class="card__img" />
+        <section class="card__txt">
+          <p>Love</p>
+          <p>Beauty</p>
+          <p>CSS that Scales!</p>
+          <p>Great warrior. Wars not make one great!</p>
+        </section>
+        <button class="card__btn card__btn--lightSide">Fun stuff</button>
+      </div>
+
+      <div class="card card--noForce">
+        <h2 class="card__header">Non-force users</h2>
+        <img src="./images/hera.jpg" class="card__img" />
+        <!--1st choice was a minor spoiler 😦 -->
+        <section class="card__txt">
+          <p>No space magic</p>
+          <p>No jedi rules</p>
+          <p>You can fly spaceships</p>
+          <p>Can still use a lightsaber (with difficulty)</p>
+        </section>
+        <button class="card__btn card__btn--noForce">Fly around</button>
+      </div>
+
+      <div class="card card--droid">
+        <h2 class="card__header">Droids</h2>
+        <img src="./images/droids.png" class="card__img" />
+        <section class="card__txt">
+          <p>Millions of languages</p>
+          <p>Lots of different types</p>
+          <p>You can survive in space</p>
+          <p>All sorts of spare parts</p>
+        </section>
+
+        <button class="card__btn card__btn--droid">Beep boop</button>
+      </div>
+    </div>
+  </body>
+</html>
