@@ -1,0 +1,10 @@
+body {
+  background-color: linen;
+  height: 100vh;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: larger;
+}
+
+.App {
+  text-align: center;
+}
